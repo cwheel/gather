@@ -23,3 +23,4 @@ if __name__ == '__main__':
             exit()
 
         userPattern = Pattern(jsonPattern)
+        userPattern.run()

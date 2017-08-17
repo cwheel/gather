@@ -1,14 +1,12 @@
 from utils.aggregateResolver import resolve
 
-class Pattern(object):
-    '''A mapping of sources to fields'''
+class IndexAggregate(object):
+    '''Represents an aggregation on an index, usually containing sub-aggregates'''
 
-    def __init__(self, json):
-        self.json = json
+    def __init__(self, **kwargs):
         self.rootAggregates = []
-        self.parsePattern()
 
-    def parsePattern(self):
+    def initilizeSubAggregates(self, json):
         rawAggregates = self.json['aggregate']
 
         for rawAggregate in rawAggregates:
@@ -18,5 +16,5 @@ class Pattern(object):
             if 'aggregate' in rawAggregate:
                 aggregate.initilizeSubAggregates(rawAggregate['aggregate'])
 
-    def run(self):
+    def aggregate(self):
         pass
