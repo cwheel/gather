@@ -1,4 +1,4 @@
-from utils.aggregateResolver import resolve
+from utils import resolve
 
 class Pattern(object):
     '''A mapping of sources to fields'''
@@ -12,7 +12,11 @@ class Pattern(object):
         rawAggregates = self.json['aggregate']
 
         for rawAggregate in rawAggregates:
-            aggregate = resolve(self, rawAggregate['type'])
+            opts = rawAggregate.copy()
+            opts.pop('aggregate', None)
+            opts.pop('type', None)
+
+            aggregate = resolve.aggregate(rawAggregate['type'], **opts)
             self.rootAggregates.append(aggregate)
 
             if 'aggregate' in rawAggregate:

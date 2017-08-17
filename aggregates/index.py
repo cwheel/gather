@@ -1,16 +1,21 @@
-from utils.aggregateResolver import resolve
+from utils import resolve
 
 class IndexAggregate(object):
     '''Represents an aggregation on an index, usually containing sub-aggregates'''
 
     def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            print 'Index with: {} = {}'.format(key, value)
+
         self.rootAggregates = []
 
     def initilizeSubAggregates(self, json):
-        rawAggregates = self.json['aggregate']
+        for rawAggregate in json:
+            opts = rawAggregate.copy()
+            opts.pop('aggregate', None)
+            opts.pop('type', None)
 
-        for rawAggregate in rawAggregates:
-            aggregate = resolve(self, rawAggregate['type'])
+            aggregate = resolve.aggregate(rawAggregate['type'], **opts)
             self.rootAggregates.append(aggregate)
 
             if 'aggregate' in rawAggregate:
