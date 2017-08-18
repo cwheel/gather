@@ -26,8 +26,10 @@ def resolve(json, path):
                     results.append(deepRes)
 
             return unwrap(results)
-        else:
+        elif component in current:
             current = current[component]
+        else:
+            return None
 
     return current
 
