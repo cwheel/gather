@@ -30,9 +30,8 @@ class IndexAggregate(object):
 
         try:
             jsonResp = json.loads(resp)
-        except BaseException as e:
+        except:
             print 'Failed to parse {}, exiting aggregation branch!'.format(self.url)
-            print e
             return
 
         indicies = jsonPath.resolve(jsonResp, self.key)

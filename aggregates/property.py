@@ -18,7 +18,7 @@ class PropertyAggregate(object):
         pass
 
     def aggregate(self, **kwargs):
-        url = self.url.format(kwargs['value'])
+        url = self.url.format(kwargs['value'] or '')
 
         response = urllib2.urlopen(url)
         resp = response.read()
