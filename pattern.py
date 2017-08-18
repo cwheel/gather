@@ -23,4 +23,5 @@ class Pattern(object):
                 aggregate.initilizeSubAggregates(rawAggregate['aggregate'])
 
     def run(self):
-        pass
+        for ag in rootAggregates:
+            ag.aggregate()

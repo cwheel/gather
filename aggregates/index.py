@@ -1,3 +1,4 @@
+import urllib2
 from utils import resolve
 
 class IndexAggregate(object):
@@ -8,6 +9,8 @@ class IndexAggregate(object):
             print 'Index with: {} = {}'.format(key, value)
 
         self.rootAggregates = []
+        self.key = kwargs['key']
+        self.url = kwargs['url']
 
     def initilizeSubAggregates(self, json):
         for rawAggregate in json:
@@ -21,5 +24,6 @@ class IndexAggregate(object):
             if 'aggregate' in rawAggregate:
                 aggregate.initilizeSubAggregates(rawAggregate['aggregate'])
 
-    def aggregate(self):
-        pass
+    def aggregate(self, **kwargs):
+        response = urllib2.urlopen('http://python.org/')
+        html = response.read()
