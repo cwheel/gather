@@ -1,9 +1,10 @@
 import urllib2
 import json
 
+from aggregate import Aggregate
 from utils import jsonPath
 
-class PropertyAggregate(object):
+class PropertyAggregate(Aggregate):
     '''Represents a standard property aggregation'''
 
     def __init__(self, **kwargs):

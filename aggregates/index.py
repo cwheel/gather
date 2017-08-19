@@ -1,10 +1,11 @@
 import urllib2
 import json
 
+from aggregate import Aggregate
 from utils import resolve
 from utils import jsonPath
 
-class IndexAggregate(object):
+class IndexAggregate(Aggregate):
     '''Represents an aggregation on an index, usually containing sub-aggregates'''
 
     def __init__(self, **kwargs):
