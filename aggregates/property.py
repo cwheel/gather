@@ -29,10 +29,23 @@ class PropertyAggregate(object):
             print 'Failed to parse {}, exiting aggregation branch!'.format(url)
             return
 
+        field = jsonPath.resolve(jsonResp, self.field)
+        fields = []
+
         if hasattr(self, 'key'):
             value = jsonPath.resolve(jsonResp, self.key)
-            print 'Property resolved value: {}'.format(value)
+
+            if value is not None:
+                fields.append({ 'field': self.__fieldName(field, self.key), 'value': value })
         elif hasattr(self, 'keys'):
             for key in self.keys:
                 value = jsonPath.resolve(jsonResp, key)
-                print 'Property resolved: {}={}'.format(key,value)
+
+                if value is not None:
+                    fields.append({ 'field': self.__fieldName(field, key), 'value': value })
+
+        return fields
+
+    def __fieldName(self, field, key):
+        safeField = ''.join(char for char in field[:1] + field.title()[1:] if not char.isspace())
+        return '{}.{}'.format(safeField, key)

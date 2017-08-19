@@ -36,7 +36,15 @@ class IndexAggregate(object):
 
         indicies = jsonPath.resolve(jsonResp, self.key)
 
+        fields = []
+
         for index in indicies:
             for aggregate in self.rootAggregates:
-                print 'Processing index: {}'.format(index)
-                aggregate.aggregate(value=index)
+                results = aggregate.aggregate(value=index)
+
+                if isinstance(results, list):
+                    fields += results
+                else:
+                    fields.append(results)
+
+        return fields
