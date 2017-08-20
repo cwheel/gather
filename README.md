@@ -30,7 +30,7 @@
 }
  ```
 
- ##### Triggers
+##### Triggers
 Triggers define when and in response to what events data should be aggregated. Currently, only `timer`'s are supported as triggers. The `triggers` property should be an array of objects defining a trigger `type` and any properties of said trigger.
 
  ```javascript
@@ -72,6 +72,7 @@ The following key paths are all valid:
 An endpoint url, must include the protocol and must return JSON.
 
 **Special Fields**
+
 `index` aggregations support (and require) their own `aggregate` property. This `aggregate` property must be an array of sub-aggregates, in the same fashion as the main `aggregate` array described above.
 
 `property` aggregations require the property `field`, to be set. `field` accepts a JSON key path in the same manner described above but the aggregated key path is uses in naming a database field for the aggregations results.
