@@ -4,9 +4,10 @@ import connectors
 class Pattern(object):
     '''A mapping of sources to fields'''
 
-    def __init__(self, json):
+    def __init__(self, json, name):
         self.json = json
         self.rootAggregates = []
+        self.name = name
 
         self.parsePattern()
 
@@ -34,6 +35,6 @@ class Pattern(object):
         for ag in self.rootAggregates:
             fields += ag.aggregate()
 
-        self.connector.configureStore(fields)
-        
+        self.connector.configureStore(self.name, fields)
+
         return fields

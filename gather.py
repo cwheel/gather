@@ -22,5 +22,8 @@ if __name__ == '__main__':
             print 'Failed to parse pattern, pattern must be JSON encoded'
             exit()
 
-        userPattern = Pattern(jsonPattern)
+        fullFileName = path.basename(args.pattern)
+        fileName = fullFileName.split('.')[0]
+
+        userPattern = Pattern(jsonPattern, fileName)
         print userPattern.run()
