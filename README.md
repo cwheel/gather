@@ -66,7 +66,9 @@ All aggregates must define a key path to aggregate on. Keys follow standard Java
 The following key paths are all valid:
 
 `a.*.e`: Returns the value of all `e`'s: `[1, 2, 3]`
+
 `a.*.*`: Returns the value of any property of any property under `a` (still all `e`'s): `[1, 2, 3]`
+
 `*`: Returns all keys at the root: 'a' (useful for `index` aggregations`
 
 **url**
