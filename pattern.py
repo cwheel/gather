@@ -1,4 +1,5 @@
 from utils import resolve
+import connectors
 
 class Pattern(object):
     '''A mapping of sources to fields'''
@@ -6,10 +7,13 @@ class Pattern(object):
     def __init__(self, json):
         self.json = json
         self.rootAggregates = []
+
         self.parsePattern()
 
     def parsePattern(self):
         rawAggregates = self.json['aggregate']
+        rawConnection = self.json['save']['connection']
+        connectorType = self.json['save']['type']
 
         for rawAggregate in rawAggregates:
             opts = rawAggregate.copy()
@@ -22,10 +26,14 @@ class Pattern(object):
             if 'aggregate' in rawAggregate:
                 aggregate.initilizeSubAggregates(rawAggregate['aggregate'])
 
+        self.connector = resolve.generic(connectors, connectorType, rawConnection)
+
     def run(self):
         fields = []
 
         for ag in self.rootAggregates:
             fields += ag.aggregate()
 
+        self.connector.configureStore(fields)
+        
         return fields

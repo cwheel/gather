@@ -4,7 +4,7 @@ import json
 from aggregate import Aggregate
 from utils import jsonPath
 
-class PropertyAggregate(Aggregate):
+class Property(Aggregate):
     '''Represents a standard property aggregation'''
 
     def __init__(self, **kwargs):

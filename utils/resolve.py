@@ -1,7 +1,10 @@
-def aggregate(type, **kwargs):
+def aggregate(agType, *args, **kwargs):
     import aggregates
 
-    agModule = getattr(aggregates, type)
-    agClassName = '{}Aggregate'.format(type.title())
+    return generic(aggregates, agType, **kwargs)
 
-    return getattr(agModule, agClassName)(**kwargs)
+def generic(module, member, *args, **kwargs):
+    memberModule = getattr(module, member)
+    className = member.title()
+
+    return getattr(memberModule, className)(*args, **kwargs)

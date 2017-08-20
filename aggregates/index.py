@@ -5,7 +5,7 @@ from aggregate import Aggregate
 from utils import resolve
 from utils import jsonPath
 
-class IndexAggregate(Aggregate):
+class Index(Aggregate):
     '''Represents an aggregation on an index, usually containing sub-aggregates'''
 
     def __init__(self, **kwargs):
