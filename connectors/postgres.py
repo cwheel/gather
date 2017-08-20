@@ -45,8 +45,8 @@ class Postgres(Connector):
             self.connection.commit()
 
     def createRecord(self, aggregate):
-        fields = ','.join([sample.field for sample in aggregate])
-        values = ','.join([self.__safeValue(sample.value) for sample in aggregate])
+        fields = ','.join(['"{}"'.format(sample['field']) for sample in aggregate])
+        values = ','.join([self.__safeValue(sample['value']) for sample in aggregate])
 
         query = 'INSERT INTO {} ({}) VALUES ({})'.format(self.table, fields, values)
 
@@ -56,7 +56,7 @@ class Postgres(Connector):
     def __safeValue(self, value):
         strVal = str(value)
 
-        if not isinstance(value, int) and not isinstance(value, float) and not isinstance(value, bool):
+        if isinstance(value, int) or isinstance(value, float) or isinstance(value, bool):
             return strVal
         else:
             return '"{}"'.format(strVal)

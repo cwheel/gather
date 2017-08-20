@@ -27,14 +27,15 @@ class Pattern(object):
             if 'aggregate' in rawAggregate:
                 aggregate.initilizeSubAggregates(rawAggregate['aggregate'])
 
-        self.connector = resolve.generic(connectors, connectorType, rawConnection)
+        self.connector = resolve.generic(connectors, connectorType, rawConnection, self.name)
 
     def run(self):
-        fields = []
+        aggregate = []
 
         for ag in self.rootAggregates:
-            fields += ag.aggregate()
+            aggregate += ag.aggregate()
 
-        self.connector.configureStore(self.name, fields)
+        self.connector.configureStore(aggregate)
+        self.connector.createRecord(aggregate)
 
-        return fields
+        return aggregate
