@@ -69,7 +69,7 @@ The following key paths are all valid:
 
 `a.*.*`: Returns the value of any property of any property under `a` (still all `e`'s): `[1, 2, 3]`
 
-`*`: Returns all keys at the root: 'a' (useful for `index` aggregations`
+`*`: Returns all keys at the root: 'a' (useful for `index` aggregations)
 
 **url**
 
