@@ -19,13 +19,13 @@ class Postgres(Connector):
                                       host=self.host, port=self.port)
         self.cursor = self.connection.cursor()
 
-    def configureStore(self, aggregate):
+    def configureStore(self, aggregateResults):
         try:
             self.cursor.execute('SELECT * FROM {}'.format(self.table))
         except psycopg2.ProgrammingError:
             fields = ''
 
-            for sample in aggregate:
+            for sample in aggregateResults:
                 fieldType = type(sample['value']).__name__
                 value = sample['value']
 
@@ -44,9 +44,9 @@ class Postgres(Connector):
             self.cursor.execute(query)
             self.connection.commit()
 
-    def createRecord(self, aggregate):
-        fields = ','.join(['"{}"'.format(sample['field']) for sample in aggregate])
-        values = ','.join([self.__safeValue(sample['value']) for sample in aggregate])
+    def createRecord(self, aggregateResults):
+        fields = ','.join(['"{}"'.format(sample['field']) for sample in aggregateResults])
+        values = ','.join([self.__safeValue(sample['value']) for sample in aggregateResults])
 
         query = 'INSERT INTO {} ({}) VALUES ({})'.format(self.table, fields, values)
 

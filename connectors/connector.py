@@ -8,9 +8,9 @@ class Connector(object):
         pass
 
     @abstractmethod
-    def configureStore(self, name, sample):
+    def configureStore(self, name, aggregateResults):
         pass
 
     @abstractmethod
-    def createRecord(self):
+    def createRecord(self, aggregateResults):
         pass

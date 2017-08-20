@@ -26,4 +26,4 @@ if __name__ == '__main__':
         fileName = fullFileName.split('.')[0]
 
         userPattern = Pattern(jsonPattern, fileName)
-        print userPattern.run()
+        userPattern.run()
