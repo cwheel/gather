@@ -1,7 +1,7 @@
 # Gather
  Gather is a small utility for continuously aggregating internet facing data from any number of user defined endpoints in response to user defined triggers. All captured data is saved in a queryable format.
 
- #### Using Gather
+ ### Using Gather
  `gather.py [-h] -p PATTERN`
 
  Gather works on the premise of a pattern, a user defined template of sorts detailing what data to aggregate and from where, which triggers to aggregate in response to and where to save the results. Gather patterns are simple JSON files, taking an appearance similar to:
@@ -14,7 +14,7 @@
 }
  ```
 
- ##### Save
+ #### Save
  The save section of a pattern describes where aggregated data should be saved. A database `type` and a `connection` property must be specified. At the moment, Postgres is the only supported database. A save block looks something like the following:
 
  ```javascript
@@ -30,7 +30,7 @@
 }
  ```
 
-##### Triggers
+#### Triggers
 Triggers define when and in response to what events data should be aggregated. Currently, only `timer`'s are supported as triggers. The `triggers` property should be an array of objects defining a trigger `type` and any properties of said trigger.
 
  ```javascript
@@ -50,6 +50,7 @@ Aggregates define what data is saved. Currently, all aggregated data must be pro
 - `property`: Aggregate a single (or multiple) properties from a JSON object.
 
 **key**
+
 All aggregates must define a key path to aggregate on. Keys follow standard Javascript object-dot notation, but additionally support wildcards. For example, if an endpoint returned the following JSON:
 
 ```javacript
@@ -69,6 +70,7 @@ The following key paths are all valid:
 `*`: Returns all keys at the root: 'a' (useful for `index` aggregations`
 
 **url**
+
 An endpoint url, must include the protocol and must return JSON.
 
 **Special Fields**
